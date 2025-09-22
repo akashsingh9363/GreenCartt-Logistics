@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
 import { LogIn, UserPlus, Mail, Lock, User, Truck, Eye, EyeOff } from 'lucide-react';
+import axios from "axios";
+import { useEffect } from 'react';
+
+
+// useEffect(
+//   // call via axios input backend url
+//   parameters send like email and password
+  
+//   ,[])
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 const LoginForm = () => {
   const { login, signup } = useData();
@@ -22,24 +33,58 @@ const LoginForm = () => {
     setError('');
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //   setError('');
 
-    let result;
+  //   let result;
+  //   if (isSignup) {
+  //     result = await signup(formData.name, formData.email, formData.password);
+  //   } else {
+  //     result = await login(formData.email, formData.password);
+  //   }
+    
+  //   if (!result.success) {
+  //     setError(result.message);
+  //   }
+    
+  //   setIsLoading(false);
+  // };
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  setError('');
+
+  try {
+    let res;
+
     if (isSignup) {
-      result = await signup(formData.name, formData.email, formData.password);
+      res = await axios.post(`${API_URL}/auth/signup`, {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password
+      });
     } else {
-      result = await login(formData.email, formData.password);
+      res = await axios.post(`${API_URL}/auth/login`, {
+        email: formData.email,
+        password: formData.password
+      });
     }
-    
-    if (!result.success) {
-      setError(result.message);
-    }
-    
+
+    // Save JWT token
+    localStorage.setItem("token", res.data.token);
+
+    alert(isSignup ? "Signup successful 🎉" : "Login successful 🚀");
+  } catch (err) {
+    console.error("Auth error:", err);
+    setError(err.response?.data?.message || "Something went wrong");
+  } finally {
     setIsLoading(false);
-  };
+  }
+};
+
 
   const toggleMode = () => {
     setIsSignup(!isSignup);

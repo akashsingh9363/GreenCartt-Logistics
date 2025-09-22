@@ -36,10 +36,7 @@ app.use('/api/', limiter);
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://green-cartt-logistics-xfx6.vercel.app'] 
-    : ['http://localhost:3000', 'http://localhost:5173'],
-  
+  origin:'https://green-cartt-logistics.vercel.app',  
   credentials: true,
   optionsSuccessStatus: 200
 };
