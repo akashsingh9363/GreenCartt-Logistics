@@ -35,12 +35,14 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 // CORS configuration
-const corsOptions = {
-  origin:'https://green-cartt-logistics.vercel.app',  
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://green-cartt-logistics-xfx6.vercel.app" // your frontend
+];
+app.use(cors({
+  origin: allowedOrigins,
   credentials: true,
-  optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
+}));
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
@@ -90,11 +92,11 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📊 Environment: ${process.env.NODE_ENV}`);
-  console.log(`🔗 API Base URL: http://localhost:${PORT}/api`);
-});
+// app.listen(PORT, () => {
+//   console.log(`🚀 Server running on port ${PORT}`);
+//   console.log(`📊 Environment: ${process.env.NODE_ENV}`);
+//   console.log(`🔗 API Base URL: http://localhost:${PORT}/api`);
+// });
 
 module.exports = app;
 module.exports.handler = serverless(app);
