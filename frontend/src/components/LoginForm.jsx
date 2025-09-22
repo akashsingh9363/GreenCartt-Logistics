@@ -4,6 +4,7 @@ import { LogIn, UserPlus, Mail, Lock, User, Truck, Eye, EyeOff } from 'lucide-re
 import axios from "axios";
 import { useEffect } from 'react';
 import API from "../api";
+import { useNavigate } from "react-router-dom";
 
 // useEffect(
 //   // call via axios input backend url
@@ -14,16 +15,17 @@ import API from "../api";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const { login, signup } = useData();
   const [isSignup, setIsSignup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: ''
+    name: "",
+    email: "",
+    password: ""
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -33,6 +35,27 @@ const LoginForm = () => {
     setError('');
   };
 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+
+    let result;
+    if (isSignup) {
+      result = await signup(formData.name, formData.email, formData.password);
+    } else {
+      result = await login(formData.email, formData.password);
+    }
+
+    if (result.success) {
+      navigate("/dashboard"); // ✅ redirect
+    } else {
+      setError(result.message);
+    }
+
+    setIsLoading(false);
+  };
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   setIsLoading(true);
@@ -53,36 +76,38 @@ const LoginForm = () => {
   // };
 
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsLoading(true);
-  setError('');
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   setIsLoading(true);
+//   setError('');
 
-  try {
-    let res;
+//   try {
+//     let res;
 
-    if (isSignup) {
-      res = await API.post('/auth/signup', {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password
-      });
-    } else {
-      res = await API.post('/auth/login', {
-        email: formData.email,
-        password: formData.password
-      });
-    }
+//     if (isSignup) {
+//       res = await API.post('/auth/signup', {
+//         name: formData.name,
+//         email: formData.email,
+//         password: formData.password
+//       });
+//     } else {
+//       res = await API.post('/auth/login', {
+//         email: formData.email,
+//         password: formData.password
+//       });
+//     }
 
-    localStorage.setItem("token", res.data.token);
-    alert(isSignup ? "Signup successful 🎉" : "Login successful 🚀");
-  } catch (err) {
-    console.error("Auth error:", err);
-    setError(err.response?.data?.message || "Something went wrong");
-  } finally {
-    setIsLoading(false);
-  }
-};
+//     localStorage.setItem("token", res.data.token);
+//     alert(isSignup ? "Signup successful 🎉" : "Login successful 🚀");
+
+
+//   } catch (err) {
+//     console.error("Auth error:", err);
+//     setError(err.response?.data?.message || "Something went wrong");
+//   } finally {
+//     setIsLoading(false);
+//   }
+// };
 
 //   const handleSubmit = async (e) => {
 //   e.preventDefault();
