@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useData } from './context/DataContext';
 import Navbar from './components/Navbar';
 import LoginForm from './components/LoginForm';
@@ -44,7 +44,7 @@ function App() {
   }
 
   return (
-    <Router>
+    
       <div className="app">
         <Navbar />
         <main className="main-content">
@@ -56,7 +56,7 @@ function App() {
           </Routes>
         </main>
       </div>
-    </Router>
+    
   );
 }
 
