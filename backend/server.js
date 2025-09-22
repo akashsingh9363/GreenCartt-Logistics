@@ -4,7 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
-const serverless = require('serverless-http');
+//const serverless = require('serverless-http');
 
 
 // Import routes
@@ -92,11 +92,11 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-// app.listen(PORT, () => {
-//   console.log(`🚀 Server running on port ${PORT}`);
-//   console.log(`📊 Environment: ${process.env.NODE_ENV}`);
-//   console.log(`🔗 API Base URL: http://localhost:${PORT}/api`);
-// });
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📊 Environment: ${process.env.NODE_ENV}`);
+  console.log(`🔗 API Base URL: http://localhost:${PORT}/api`);
+});
 
 module.exports = app;
-module.exports.handler = serverless(app);
+//module.exports.handler = serverless(app);
