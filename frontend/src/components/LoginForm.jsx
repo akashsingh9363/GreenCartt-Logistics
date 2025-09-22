@@ -48,7 +48,7 @@ const LoginForm = () => {
       result = await login(formData.email, formData.password);
     }
 
-    if (result.success) {
+    if (result) {
       navigate("/dashboard"); // ✅ redirect
     } else {
       setError(result.message);
