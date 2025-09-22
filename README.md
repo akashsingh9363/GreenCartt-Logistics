@@ -131,9 +131,9 @@ The system is built with scalability and security in mind, making it suitable fo
 ---
 ```markdown
 ### 📖 API Documentation
-Auth Routes
-Signup--- POST /api/auth/signup
+### Auth Routes
 
+Signup--- POST /api/auth/signup
 Request:
 {
   "name": "Akash",
@@ -155,7 +155,6 @@ Response:
 }
 
 Login--- POST /api/auth/login
-
 Request:
 {
   "email": "akash@example.com",
@@ -175,7 +174,8 @@ Response:
   }
 }
 **Endpoint:**
-  
+```
+
 ### Driver Routes
 Get all drivers
 GET /api/drivers
