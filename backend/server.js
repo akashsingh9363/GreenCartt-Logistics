@@ -35,14 +35,28 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 // CORS configuration
+// const allowedOrigins = ["https://green-cartt-logistics-xfx6.vercel.app"]; // your frontend
+// app.use(cors({
+//   origin: allowedOrigins,
+//   credentials: true,
+// }));
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://green-cartt-logistics-xfx6.vercel.app" // your frontend
+  "https://green-cartt-logistics-xfx6.vercel.app",
+  "http://localhost:5173" // add your local dev frontend URL
 ];
+
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // allow REST tools like Postman
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
+
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));

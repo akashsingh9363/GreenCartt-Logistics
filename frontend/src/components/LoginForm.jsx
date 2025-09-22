@@ -3,7 +3,7 @@ import { useData } from '../context/DataContext';
 import { LogIn, UserPlus, Mail, Lock, User, Truck, Eye, EyeOff } from 'lucide-react';
 import axios from "axios";
 import { useEffect } from 'react';
-
+import API from "../api";
 
 // useEffect(
 //   // call via axios input backend url
@@ -11,7 +11,7 @@ import { useEffect } from 'react';
   
 //   ,[])
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const LoginForm = () => {
   const { login, signup } = useData();
@@ -52,7 +52,8 @@ const LoginForm = () => {
   //   setIsLoading(false);
   // };
 
-  const handleSubmit = async (e) => {
+
+const handleSubmit = async (e) => {
   e.preventDefault();
   setIsLoading(true);
   setError('');
@@ -61,21 +62,19 @@ const LoginForm = () => {
     let res;
 
     if (isSignup) {
-      res = await axios.post(`${API_URL}/auth/signup`, {
+      res = await API.post('/auth/signup', {
         name: formData.name,
         email: formData.email,
         password: formData.password
       });
     } else {
-      res = await axios.post(`${API_URL}/auth/login`, {
+      res = await API.post('/auth/login', {
         email: formData.email,
         password: formData.password
       });
     }
 
-    // Save JWT token
     localStorage.setItem("token", res.data.token);
-
     alert(isSignup ? "Signup successful 🎉" : "Login successful 🚀");
   } catch (err) {
     console.error("Auth error:", err);
@@ -84,6 +83,39 @@ const LoginForm = () => {
     setIsLoading(false);
   }
 };
+
+//   const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   setIsLoading(true);
+//   setError('');
+
+//   try {
+//     let res;
+
+//     if (isSignup) {
+//       res = await axios.post(`${API_URL}/auth/signup`, {
+//         name: formData.name,
+//         email: formData.email,
+//         password: formData.password
+//       });
+//     } else {
+//       res = await axios.post(`${API_URL}/auth/login`, {
+//         email: formData.email,
+//         password: formData.password
+//       });
+//     }
+
+//     // Save JWT token
+//     localStorage.setItem("token", res.data.token);
+
+//     alert(isSignup ? "Signup successful 🎉" : "Login successful 🚀");
+//   } catch (err) {
+//     console.error("Auth error:", err);
+//     setError(err.response?.data?.message || "Something went wrong");
+//   } finally {
+//     setIsLoading(false);
+//   }
+// };
 
 
   const toggleMode = () => {
