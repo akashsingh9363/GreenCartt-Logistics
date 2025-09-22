@@ -74,38 +74,37 @@ The system is built with scalability and security in mind, making it suitable fo
 
 ### 1️⃣ Clone the Repository
 ``bash
-git clone https://github.com/your-username/greencart.git
-cd greencart
+- git clone https://github.com/your-username/greencart.git
+- cd greencart
 
 ### 2️⃣ Backend Setup
-cd backend
-npm install
-Create a .env file inside backend/ (see Environment Variables).
-Start backend server:
-npm start
+- cd backend
+- npm install
+- Create a .env file inside backend/ (see Environment Variables).
+- Start backend server:
+- npm start
 
 ### 3️⃣ Frontend Setup
-cd frontend
-npm install
-
-Create a .env file inside frontend/ (see Environment Variables).
-Start frontend development server:
-npm run dev
+- cd frontend
+- npm install
+- Create a .env file inside frontend/ (see Environment Variables).
+- Start frontend development server:
+- npm run dev
 
 ### 4️⃣ Access the Application
-Backend: http://localhost:5000/api
-Frontend: http://localhost:5173
+- Backend: http://localhost:5000/api
+- Frontend: http://localhost:5173
 
 ---
 
 ### 🔑 Environment Variables
-Backend (/backend/.env)
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
+- Backend (/backend/.env)
+- PORT=5000
+- MONGO_URI=your_mongodb_connection_string
+- JWT_SECRET=your_jwt_secret
 
-Frontend (/frontend/.env)
-VITE_API_URL=http://localhost:5000/api
+- Frontend (/frontend/.env)
+- VITE_API_URL=http://localhost:5000/api
 
 ### ⚠️ Never commit real values of secrets to GitHub.
 
