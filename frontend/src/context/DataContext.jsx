@@ -22,21 +22,21 @@ export const DataProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
   const [token, setToken] = useState(localStorage.getItem("token"));
-
+  
   // After successful login/signup
-  if (data.status === 'success') {
-    setToken(data.data.token);
-    setUser(data.data.user);
+  // if (data.status === 'success') {
+  //   setToken(data.data.token);
+  //   setUser(data.data.user);
 
-    localStorage.setItem("token", data.data.token);
-    localStorage.setItem("user", JSON.stringify(data.data.user));
-  }
+  //   localStorage.setItem("token", data.data.token);
+  //   localStorage.setItem("user", JSON.stringify(data.data.user));
+  // }
 
-  // In logout()
-  setToken(null);
-  setUser(null);
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
+  // // In logout()
+  // setToken(null);
+  // setUser(null);
+  // localStorage.removeItem("token");
+  // localStorage.removeItem("user");
 
   const [drivers, setDrivers] = useState([
     { id: 1, name: 'Amit', status: 'Active', efficiency: 95, deliveries: 234 },
