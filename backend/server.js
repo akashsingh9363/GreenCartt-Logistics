@@ -4,7 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
-//const serverless = require('serverless-http');
+const serverless = require('serverless-http');
 
 
 // Import routes
@@ -100,4 +100,4 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-//module.exports.handler = serverless(app);
+module.exports.handler = serverless(app);
