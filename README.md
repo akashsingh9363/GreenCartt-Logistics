@@ -175,7 +175,7 @@ Response:
   }
 }
 **Endpoint:**
-```http  
+  
 ### Driver Routes
 Get all drivers
 GET /api/drivers
