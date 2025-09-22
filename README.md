@@ -96,6 +96,8 @@ npm run dev
 Backend: http://localhost:5000/api
 Frontend: http://localhost:5173
 
+---
+
 ### 🔑 Environment Variables
 Backend (/backend/.env)
 PORT=5000
