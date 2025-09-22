@@ -109,6 +109,8 @@ VITE_API_URL=http://localhost:5000/api
 
 ### ⚠️ Never commit real values of secrets to GitHub.
 
+---
+
 ### 🌍 Deployment Instructions
 ### Backend (Render)
 1.Push backend code to GitHub.
@@ -126,6 +128,8 @@ VITE_API_URL=http://localhost:5000/api
 3.Connect GitHub repo.
 4.Add environment variable VITE_API_URL= Deployed backend API URL.
 5.Deploy and access your frontend live link.
+
+---
 
 ### 📖 API Documentation
 Auth Routes
@@ -186,6 +190,8 @@ Authorization: Bearer <token>
 Get all orders
 GET /api/orders
 Authorization: Bearer <token>
+
+---
 
 ### 👨‍💻 Author
 
