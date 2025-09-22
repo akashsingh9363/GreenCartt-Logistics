@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useData } from '../context/DataContext';
 import { LogIn, UserPlus, Mail, Lock, User, Truck, Eye, EyeOff } from 'lucide-react';
-import axios from "axios";
-import { useEffect } from 'react';
-import API from "../api";
 import { useNavigate } from "react-router-dom";
 
 // useEffect(
