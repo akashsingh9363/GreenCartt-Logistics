@@ -19,7 +19,7 @@ const { errorHandler } = require('./middleware/errorHandler');
 const { authenticate } = require('./middleware/auth');
 
 const app = express();
-
+app.set('trust proxy', 1); 
 // Security middleware
 app.use(helmet());
 
@@ -40,22 +40,34 @@ app.use('/api/', limiter);
 //   origin: allowedOrigins,
 //   credentials: true,
 // }));
-const allowedOrigins = [
-  "https://green-cartt-logistics-xfx6.vercel.app",
-  "http://localhost:5173" // add your local dev frontend URL
-];
+// const allowedOrigins = [
+//   "https://green-cartt-logistics-xfx6.vercel.app",
+//   "http://localhost:5173" // add your local dev frontend URL
+// ];
+
+const allowedOrigins = process.env.CORS_ORIGIN.split(",");
 
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true); // allow REST tools like Postman
-    if (allowedOrigins.includes(origin)) {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true,
 }));
+// app.use(cors({
+//   origin: function(origin, callback) {
+//     if (!origin) return callback(null, true); // allow REST tools like Postman
+//     if (allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true,
+// }));
 
 
 // Body parsing middleware
