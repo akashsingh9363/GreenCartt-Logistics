@@ -113,24 +113,24 @@ VITE_API_URL=http://localhost:5000/api
 
 ### 🌍 Deployment Instructions
 ### Backend (Render)
-1.Push backend code to GitHub.
-2.Go to Render
-3.Create a new Web Service -> Connect GitHub repo.
-4.Set build command: npm install
-  Start command: node server.js
-5.Add environment variables in Render Dashboard.
-6.Deploy -> Copy the deployed API URL.
+1. Push backend code to GitHub.
+2. Go to Render
+3. Create a new Web Service -> Connect GitHub repo.
+4. Set build command: npm install
+   Start command: node server.js
+5. Add environment variables in Render Dashboard.
+6. Deploy -> Copy the deployed API URL.
 
 
 ### Frontend (Netlify / Vercel)
-1.Push frontend code to GitHub.
-2.Go to Netlify or Vergel.
-3.Connect GitHub repo.
-4.Add environment variable VITE_API_URL= Deployed backend API URL.
-5.Deploy and access your frontend live link.
+1. Push frontend code to GitHub.
+2. Go to Netlify or Vergel.
+3. Connect GitHub repo.
+4. Add environment variable VITE_API_URL= Deployed backend API URL.
+5. Deploy and access your frontend live link.
 
 ---
-
+```markdown
 ### 📖 API Documentation
 Auth Routes
 Signup--- POST /api/auth/signup
@@ -175,7 +175,8 @@ Response:
     }
   }
 }
-
+**Endpoint:**
+```http  
 ### Driver Routes
 Get all drivers
 GET /api/drivers
